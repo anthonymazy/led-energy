@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}<link rel="stylesheet" href="/css/baguettebox.css">{% endblock %}
+
+{% block body %}
+    <section>
+        <div class="container">
+            <div class="row">
+
+                {% include 'partials/categories.html.twig' %}
+
+                <div class="col-sm-9 padding-right">
+                    <div class="product-details">
+                        <div class="col-sm-5">
+                            <div class="view-product">
+                                <img src="{{app.request.basepath}}/uploads//images/{{ product.coverImage }}" alt="{{ product.coverImage }}">
+                            </div>
+                            <div id="similar-product" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="item gallery active">
+                                        {% for image in product.images %}
+                                        <a href="{{app.request.basepath}}/uploads//images/{{ image.url }}" data-caption="Image caption"><img width="85" height="25" src="{{app.request.basepath}}/uploads/images/{{ image.url }}" alt="{{ image.alt }}"></a>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="product-information">
+                                <h2>{{ product.title }}</h2>
+                                <span>
+									<span>{{ product.price }} €</span>
+								</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="category-tab shop-details-tab">
+                        <div class="col-sm-12">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#description" data-toggle="tab">Description</a></li>
+                                <li><a href="#Spécifications" data-toggle="tab">Spécifications</a></li>
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id="description" >
+                                {{ product.description }}
+                            </div>
+
+                            <div class="tab-pane fade" id="Spécifications" >
+                                {{ product.specifications | raw }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/baguettebox.js"></script>
+    <script>
+        baguetteBox.run('.gallery');
+    </script>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section>
+        <div class="container">
+            <p>Résultat de recherche avec "{{ string }}"</p>
+
+            <div class="row">
+
+                {#{% include 'partials/categories.html.twig' %}#}
+
+                <div class="col-sm-9 padding-right">
+                    <div class="features_items">
+                        {% if products is empty %}
+                            <p>Aucun article ne correspond à votre recherche</p>
+                        {% else %}
+                            {% for product in products %}
+                                <div class="col-sm-4">
+                                    <div class="product-image-wrapper">
+                                        <div class="single-products">
+                                            <div class="productinfo text-center">
+                                                <img src="{{app.request.basepath}}/uploads/images/{{ product.coverImage }}" alt="{{ product.coverImage }}">
+                                                <h2>{{ product.price }} €</h2>
+                                                <p>{{ product.title }}</p>
+                                                <a href="{{ path('show_product', {id: product.id, slug: product.slug}) }}" class="btn btn-default add-to-cart"><i class="fa fa-eye"></i>Voir produit</a>
+                                            </div>
+                                            <div class="product-overlay">
+                                                <div class="overlay-content">
+                                                    <h2>{{ product.price }} €</h2>
+                                                    <p>{{ product.title }}</p>
+                                                    <a href="{{ path('show_product', {id: product.id, slug: product.slug}) }}" class="btn btn-default add-to-cart"><i class="fa fa-eye"></i>Voir produit</a>
+                                                </div>
+                                            </div>
+                                            {#<img src="/images/home/new.png" class="new" alt="" />#}
+                                        </div>
+                                        <div class="choose">
+                                            <ul class="nav nav-pills nav-justified">
+                                                {#<li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>#}
+                                                {#<li><a href=""><i class="fa fa-plus-square"></i>Add to compare</a></li>#}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    {#<ul class="pagination">#}
+                    {#<li class="active"><a href="">1</a></li>#}
+                    {#<li><a href="">2</a></li>#}
+                    {#<li><a href="">3</a></li>#}
+                    {#<li><a href="">&raquo;</a></li>#}
+                    {#</ul>#}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

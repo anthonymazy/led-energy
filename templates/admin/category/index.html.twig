@@ -1,0 +1,34 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Administration des catégories{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1 class="my-5">Administration des catégories</h1>
+
+        <a class="btn btn-primary mb-5" href="{{ path('admin_category_create') }}">Ajouter une catégorie</a>
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.name }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('admin_category_update', {id: category.id}) }}"><i class="fas fa-edit"></i></a>
+                        <a class="btn btn-danger" href="{{ path('admin_category_delete', {id: category.id}) }}" onclick="return confirm('Etes-vous sûr de vouloir supprimer ?');"><i class="fas fa-trash"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
